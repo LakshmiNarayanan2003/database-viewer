@@ -4,6 +4,7 @@ import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
+  base: '/database-viewer/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -12,4 +13,6 @@ export default defineConfig({
   worker: {
     format: 'es',
   },
+  publicDir: 'public',
+  assetsInclude: ['**/*.wasm'],
 })

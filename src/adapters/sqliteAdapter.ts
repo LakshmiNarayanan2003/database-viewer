@@ -6,8 +6,9 @@ let SQL: SqlJsStatic | null = null;
 
 async function initSQL(): Promise<SqlJsStatic> {
   if (!SQL) {
+    const basePath = import.meta.env.BASE_URL || '/';
     SQL = await initSqlJs({
-      locateFile: (_file) => `/sql-wasm.wasm`,
+      locateFile: (_file) => `${basePath}sql-wasm.wasm`,
     });
   }
   return SQL;

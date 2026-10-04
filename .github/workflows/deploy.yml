@@ -44,7 +44,7 @@ jobs:
         run: npm ci
 
       - name: Build for GitHub Pages
-        run: npm run build -- --base=/database-viewer/
+        run: npm run build
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
