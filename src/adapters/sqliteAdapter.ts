@@ -7,7 +7,7 @@ let SQL: SqlJsStatic | null = null;
 async function initSQL(): Promise<SqlJsStatic> {
   if (!SQL) {
     SQL = await initSqlJs({
-      locateFile: (file) => `/sql-wasm.wasm`,
+      locateFile: (_file) => `/sql-wasm.wasm`,
     });
   }
   return SQL;
