@@ -1,6 +1,6 @@
 # Database Viewer
 
-Needed a database viewer when I was working on my Master thesis, couldn't find a good one, so I built this.
+Needed a database viewer when I was working on my Master thesis, so I built this.
 
 A minimalist database explorer for the browser. Open and explore SQLite, CSV, TSV, JSON, JSONL, and Excel files with a clean, modern interface.
 
