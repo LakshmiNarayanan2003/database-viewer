@@ -18,6 +18,7 @@ A minimalist database explorer for the browser. Open and explore SQLite, CSV, TS
 - **Export Options**: Export data to CSV or JSON formats
 - **Light & Dark Themes**: Switch between themes with a single click
 - **Drag & Drop**: Easily import files by dragging them into the application
+- **Upload Modal**: Upload additional files even after the initial import
 - **Sample Datasets**: Built-in sample CSV, JSON, JSONL, and SQLite databases for testing
 
 ## Supported Formats
@@ -103,7 +104,8 @@ python3 sample-data/create_sample_db.py
 
 1. **Drag & Drop**: Drag your database or data file onto the welcome screen
 2. **File Picker**: Click "Browse files" to select files from your computer
-3. **Sample Data**: Click "Load sample CSV data" to explore with a demo dataset
+3. **Sample Data**: Click any sample dataset button to explore with demo data
+4. **Upload Button**: After files are loaded, click the "Upload" button in the header to add more files via a modal
 
 ### Exploring Data
 
