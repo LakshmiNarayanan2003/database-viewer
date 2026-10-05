@@ -48,6 +48,7 @@ export class ExcelAdapter implements DataAdapter {
       size: file.size,
       tables,
       createdAt: new Date(),
+      supportsSQL: false,
     };
   }
 

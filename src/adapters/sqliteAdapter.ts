@@ -39,6 +39,7 @@ export class SQLiteAdapter implements DataAdapter {
       size: file.size,
       tables,
       createdAt: new Date(),
+      supportsSQL: true,
     };
   }
 
@@ -81,6 +82,23 @@ export class SQLiteAdapter implements DataAdapter {
           defaultValue: dflt_value,
         });
       }
+    }
+
+    // Extract foreign keys
+    try {
+      const fkPragma = db.exec(`PRAGMA foreign_key_list(${tableName})`);
+      if (fkPragma.length > 0) {
+        for (const row of fkPragma[0].values) {
+          const [, _id, _seq, table, from, to, _on_update, _on_delete, _match] = row;
+          const columnName = from as string;
+          const column = columns.find(c => c.name === columnName);
+          if (column) {
+            column.foreignKey = `${table}.${to}`;
+          }
+        }
+      }
+    } catch (e) {
+      // Foreign keys might not exist for this table
     }
 
     return columns;

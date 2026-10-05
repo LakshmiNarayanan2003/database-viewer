@@ -48,6 +48,7 @@ export class CSVAdapter implements DataAdapter {
             size: file.size,
             tables: [table],
             createdAt: new Date(),
+            supportsSQL: false,
           });
         },
         error: (error) => {
@@ -164,6 +165,7 @@ export class TSVAdapter extends CSVAdapter {
             size: file.size,
             tables: [table],
             createdAt: new Date(),
+            supportsSQL: false,
           });
         },
         error: (error) => {

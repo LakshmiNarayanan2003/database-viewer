@@ -61,6 +61,7 @@ export class JSONAdapter implements DataAdapter {
       size: file.size,
       tables: [table],
       createdAt: new Date(),
+      supportsSQL: false,
     };
   }
 
@@ -187,6 +188,7 @@ export class JSONLAdapter extends JSONAdapter {
       size: file.size,
       tables: [table],
       createdAt: new Date(),
+      supportsSQL: false,
     };
   }
 }

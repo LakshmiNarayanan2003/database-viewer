@@ -2,21 +2,24 @@ import { useAppStore } from '@/stores/useAppStore';
 import { Sidebar } from '@/components/Sidebar';
 import { DataTable } from '@/components/DataTable';
 import { SchemaViewer } from '@/components/SchemaViewer';
+import { SqlEditor } from '@/components/SqlEditor';
+import { DataModel } from '@/components/DataModel';
 import { StatusBar } from '@/components/StatusBar';
 import { FileDropZone } from '@/components/FileDropZone';
 import { useTheme } from '@/hooks/useTheme';
 import { useState } from 'react';
-import { Database, Layout, Moon, Sun } from 'lucide-react';
+import { Database, Layout, Moon, Sun, Code, Network } from 'lucide-react';
 
-type TabType = 'data' | 'structure';
+type TabType = 'data' | 'structure' | 'sql' | 'model';
 
 export function App() {
-  const { files, activeTable } = useAppStore();
+  const { files, activeFileId } = useAppStore();
   const { theme, setTheme } = useTheme();
   const [activeTab, setActiveTab] = useState<TabType>('data');
 
   const hasFiles = files.length > 0;
-  const hasActiveTable = activeTable !== null;
+  const activeFile = files.find(f => f.id === activeFileId);
+  const supportsSQL = activeFile?.supportsSQL || false;
 
   return (
     <div className="h-screen flex flex-col bg-background text-foreground">
@@ -40,7 +43,7 @@ export function App() {
       <div className="flex-1 flex overflow-hidden">
         <Sidebar />
 
-        {hasFiles && hasActiveTable ? (
+        {hasFiles ? (
           <div className="flex-1 flex flex-col">
             {/* Tab navigation */}
             <div className="border-b border-border bg-background">
@@ -67,11 +70,43 @@ export function App() {
                   <Database className="h-4 w-4" />
                   Structure
                 </button>
+                {supportsSQL && (
+                  <button
+                    onClick={() => setActiveTab('sql')}
+                    className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                      activeTab === 'sql'
+                        ? 'border-primary text-foreground'
+                        : 'border-transparent text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <Code className="h-4 w-4" />
+                    SQL
+                  </button>
+                )}
+                <button
+                  onClick={() => setActiveTab('model')}
+                  className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
+                    activeTab === 'model'
+                      ? 'border-primary text-foreground'
+                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Network className="h-4 w-4" />
+                  Model
+                </button>
               </div>
             </div>
 
             {/* Tab content */}
-            {activeTab === 'data' ? <DataTable /> : <SchemaViewer />}
+            {activeTab === 'data' ? (
+              <DataTable />
+            ) : activeTab === 'structure' ? (
+              <SchemaViewer />
+            ) : activeTab === 'sql' ? (
+              <SqlEditor />
+            ) : (
+              <DataModel />
+            )}
           </div>
         ) : (
           <FileDropZone onFileLoaded={() => {}} />

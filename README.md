@@ -13,9 +13,12 @@ A minimalist database explorer for the browser. Open and explore SQLite, CSV, TS
 - **Clean UI/UX**: Minimalist design inspired by Notion and Linear
 - **Data Exploration**: Paginated tables, search, sorting, and filtering
 - **Schema Inspection**: View table structure, column types, and constraints
+- **SQL Query Editor**: Execute SQL queries on SQLite files with query history
+- **Data Model View**: Visualize database tables and their relationships (Power BI-style)
 - **Export Options**: Export data to CSV or JSON formats
 - **Light & Dark Themes**: Switch between themes with a single click
 - **Drag & Drop**: Easily import files by dragging them into the application
+- **Sample Datasets**: Built-in sample CSV, JSON, JSONL, and SQLite databases for testing
 
 ## Supported Formats
 
@@ -27,11 +30,18 @@ A minimalist database explorer for the browser. Open and explore SQLite, CSV, TS
 - **JSON**: `.json`
 - **JSON Lines**: `.jsonl`, `.ndjson`
 
-### Phase 2 (Planned)
+### Phase 2 (Currently Supported)
+- **SQL Query Editor**: Execute SQL queries on SQLite files
+- **Query History**: Track and reuse previous queries
+- **Data Model View**: Visualize database tables and relationships (Power BI-style)
+- **Foreign Key Detection**: Automatically detect and display foreign key relationships
+- **Enhanced Sample Data**: Multiple sample datasets for testing
+
+### Phase 3 (Planned)
 - DuckDB: `.duckdb`
 - Parquet: `.parquet`
 - Apache Arrow: `.arrow`, `.feather`
-- SQL Query Editor with DuckDB-Wasm
+- Advanced filtering options
 
 ## Installation
 
@@ -77,9 +87,10 @@ The built files will be in the `dist/` directory and can be deployed to any stat
 
 Sample data files are included in the `sample-data/` directory for testing:
 
-- `sample.db` - SQLite database with users and orders tables
+- `sample.db` - SQLite database with users and orders tables (includes foreign key relationships)
 - `products.csv` - Product catalog in CSV format
 - `employees.json` - Employee data in JSON format
+- `sales.jsonl` - Sales transaction data in JSON Lines format
 
 Generate the SQLite sample database by running:
 ```bash
@@ -99,6 +110,23 @@ python3 sample-data/create_sample_db.py
 1. **Sidebar**: Browse open files and their tables/sheets
 2. **Data Tab**: View table data with pagination, search, and sorting
 3. **Structure Tab**: Inspect table schema, column types, and constraints
+4. **SQL Tab**: Execute SQL queries on SQLite files (SQLite only)
+5. **Model Tab**: Visualize database tables and their relationships (Power BI-style)
+
+### SQL Query Editor (SQLite)
+
+- **Query Execution**: Write and execute SQL queries using Ctrl/Cmd + Enter
+- **Query History**: View and reuse previous queries (up to 20)
+- **Results Display**: View query results with row count and execution time
+- **Quick Reference**: Common SQL query examples provided
+
+### Data Model View
+
+- **Table Visualization**: View all tables in the database as cards
+- **Column Details**: See column names, types, and constraints
+- **Primary Keys**: Marked with a key icon
+- **Foreign Keys**: Marked with a link icon and shows target table
+- **Relationships**: Display foreign key relationships between tables
 
 ### Search & Filter
 
@@ -151,6 +179,8 @@ src/components/
 ├── Sidebar.tsx       # File and table explorer
 ├── DataTable.tsx     # Data viewer with pagination
 ├── SchemaViewer.tsx  # Schema inspection
+├── SqlEditor.tsx     # SQL query editor
+├── DataModel.tsx     # Data model visualization
 ├── StatusBar.tsx     # Status information
 └── FileDropZone.tsx  # Drag-and-drop import
 ```

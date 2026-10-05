@@ -36,6 +36,7 @@ export interface DatabaseFile {
   size: number;
   tables: Table[];
   createdAt: Date;
+  supportsSQL?: boolean;
 }
 
 export interface QueryResult {
