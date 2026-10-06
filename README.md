@@ -38,12 +38,13 @@ A minimalist database explorer for the browser. Open and explore SQLite, CSV, TS
 - **Foreign Key Detection**: Automatically detect and display foreign key relationships
 - **Enhanced Sample Data**: Multiple sample datasets for testing
 
-### Phase 3 (Planned)
-- DuckDB: `.duckdb`
+### Phase 3 (Currently Supported)
 - Parquet: `.parquet`
 - Apache Arrow: `.arrow`, `.feather`
 - Advanced filtering options
 
+### Phase 4 (Future)
+- DuckDB: `.duckdb`
 ## Installation
 
 ### Prerequisites
@@ -92,11 +93,15 @@ Sample data files are included in the `sample-data/` directory for testing:
 - `products.csv` - Product catalog in CSV format
 - `employees.json` - Employee data in JSON format
 - `sales.jsonl` - Sales transaction data in JSON Lines format
+- `sample.arrow` - Employee data in Apache Arrow format (Phase 3)
+- `sample.feather` - Employee data in Feather format (Phase 3)
 
 Generate the SQLite sample database by running:
 ```bash
 python3 sample-data/create_sample_db.py
 ```
+
+For additional Phase 3 sample data formats (Parquet, DuckDB), see `sample-data/PHASE3_SAMPLES.md` for instructions.
 
 ## Usage
 
@@ -195,6 +200,9 @@ src/components/
 - **Tailwind CSS**: Styling
 - **Zustand**: State management
 - **sql.js**: SQLite database engine
+- **@duckdb/duckdb-wasm**: DuckDB database engine
+- **parquet-wasm**: Parquet file parsing
+- **apache-arrow**: Arrow/Feather file parsing
 - **Papa Parse**: CSV/TSV parsing
 - **SheetJS (xlsx)**: Excel file parsing
 - **Lucide React**: Icons

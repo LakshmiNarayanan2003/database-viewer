@@ -10,4 +10,5 @@ export interface DataAdapter {
   getTableCount(fileId: string, tableName: string): Promise<number>;
   executeQuery?(fileId: string, query: string): Promise<QueryResult>;
   exportTable?(fileId: string, tableName: string, format: 'csv' | 'json'): Promise<string>;
+  close?(fileId: string): void;
 }

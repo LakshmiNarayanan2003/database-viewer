@@ -60,7 +60,7 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
 
         <h2 className="text-2xl font-semibold mb-2">Drop your database or data file here</h2>
         <p className="text-muted-foreground mb-6">
-          Supports SQLite, DuckDB, CSV, TSV, JSON, JSONL, Excel, and Parquet files
+          Supports SQLite, CSV, TSV, JSON, JSONL, Excel, Arrow, and Feather files
         </p>
 
         <label className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md cursor-pointer hover:bg-primary/90 transition-colors">
@@ -71,7 +71,7 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
             multiple
             onChange={handleFileSelect}
             className="hidden"
-            accept=".db,.sqlite,.sqlite3,.duckdb,.csv,.tsv,.xlsx,.xls,.json,.jsonl,.ndjson,.parquet"
+            accept=".db,.sqlite,.sqlite3,.csv,.tsv,.xlsx,.xls,.json,.jsonl,.ndjson,.arrow,.feather"
           />
         </label>
 
@@ -149,6 +149,44 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
               className="text-sm text-primary hover:underline"
             >
               Load sample JSONL
+            </button>
+            <button
+              onClick={async () => {
+                try {
+                  const basePath = import.meta.env.BASE_URL || '/';
+                  const response = await fetch(`${basePath}sample-data/sample.arrow`);
+                  if (!response.ok) throw new Error('Failed to load sample Arrow file');
+                  const arrayBuffer = await response.arrayBuffer();
+                  const file = new File([arrayBuffer], 'sample.arrow', { type: 'application/octet-stream' });
+                  await importFiles([file]);
+                  onFileLoaded?.();
+                } catch (err) {
+                  console.error('Failed to load sample Arrow:', err);
+                  alert('Failed to load sample Arrow file. Please drag and drop the file instead.');
+                }
+              }}
+              className="text-sm text-primary hover:underline"
+            >
+              Load sample Arrow
+            </button>
+            <button
+              onClick={async () => {
+                try {
+                  const basePath = import.meta.env.BASE_URL || '/';
+                  const response = await fetch(`${basePath}sample-data/sample.feather`);
+                  if (!response.ok) throw new Error('Failed to load sample Feather file');
+                  const arrayBuffer = await response.arrayBuffer();
+                  const file = new File([arrayBuffer], 'sample.feather', { type: 'application/octet-stream' });
+                  await importFiles([file]);
+                  onFileLoaded?.();
+                } catch (err) {
+                  console.error('Failed to load sample Feather:', err);
+                  alert('Failed to load sample Feather file. Please drag and drop the file instead.');
+                }
+              }}
+              className="text-sm text-primary hover:underline"
+            >
+              Load sample Feather
             </button>
           </div>
         </div>

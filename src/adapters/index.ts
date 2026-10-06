@@ -3,6 +3,7 @@ import { SQLiteAdapter } from './sqliteAdapter';
 import { CSVAdapter, TSVAdapter } from './csvAdapter';
 import { JSONAdapter, JSONLAdapter } from './jsonAdapter';
 import { ExcelAdapter } from './excelAdapter';
+import { ArrowAdapter, FeatherAdapter } from './arrowAdapter';
 import { FileFormat } from '@/types';
 
 export class AdapterRegistry {
@@ -19,6 +20,8 @@ export class AdapterRegistry {
     const jsonAdapter = new JSONAdapter();
     const jsonlAdapter = new JSONLAdapter();
     const excelAdapter = new ExcelAdapter();
+    const arrowAdapter = new ArrowAdapter();
+    const featherAdapter = new FeatherAdapter();
 
     this.adapters.set('sqlite', sqliteAdapter);
     this.adapters.set('csv', csvAdapter);
@@ -26,6 +29,8 @@ export class AdapterRegistry {
     this.adapters.set('json', jsonAdapter);
     this.adapters.set('jsonl', jsonlAdapter);
     this.adapters.set('excel', excelAdapter);
+    this.adapters.set('arrow', arrowAdapter);
+    this.adapters.set('feather', featherAdapter);
   }
 
   getAdapter(format: FileFormat): DataAdapter | null {

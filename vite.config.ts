@@ -14,5 +14,8 @@ export default defineConfig({
     format: 'es',
   },
   publicDir: 'public',
-  assetsInclude: ['**/*.wasm'],
+  assetsInclude: ['**/*.wasm', '**/*.duckdb'],
+  optimizeDeps: {
+    exclude: ['@duckdb/duckdb-wasm', 'parquet-wasm'],
+  },
 })
