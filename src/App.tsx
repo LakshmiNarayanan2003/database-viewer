@@ -28,7 +28,10 @@ export function App() {
       {/* Header */}
       <div className="h-14 border-b border-border bg-background flex items-center justify-between px-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-lg font-semibold">Database Viewer</h1>
+          <div className="flex items-center gap-2.5">
+            <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="" width={28} height={28} className="rounded-md dark:ring-1 dark:ring-border" />
+            <h1 className="text-base font-semibold tracking-tight">Database Viewer</h1>
+          </div>
           {hasFiles && (
             <button
               onClick={() => setUploadModalOpen(true)}
@@ -43,6 +46,7 @@ export function App() {
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           className="p-2 rounded-md hover:bg-accent transition-colors"
           title="Toggle theme"
+          aria-label="Toggle theme"
         >
           {theme === 'light' ? (
             <Moon className="h-5 w-5" />

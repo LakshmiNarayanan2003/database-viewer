@@ -41,29 +41,29 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
   }, [importFiles, onFileLoaded]);
 
   return (
-    <div className="flex-1 flex items-center justify-center p-8">
+    <div className="flex-1 flex items-center justify-center p-4 sm:p-8">
       <div
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         className={cn(
-          'w-full max-w-2xl border-2 border-dashed rounded-lg p-12 text-center transition-colors',
+          'w-full max-w-2xl border border-dashed rounded-lg px-6 py-10 sm:px-12 sm:py-14 text-center transition-colors',
           isDragging ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50',
           loading && 'opacity-50 pointer-events-none'
         )}
       >
-        <div className="flex justify-center gap-4 mb-6">
-          <Database className="h-12 w-12 text-muted-foreground" />
-          <FileSpreadsheet className="h-12 w-12 text-muted-foreground" />
-          <FileText className="h-12 w-12 text-muted-foreground" />
+        <div className="flex justify-center gap-3 mb-6">
+          <Database className="h-7 w-7 text-muted-foreground" />
+          <FileSpreadsheet className="h-7 w-7 text-muted-foreground" />
+          <FileText className="h-7 w-7 text-muted-foreground" />
         </div>
 
-        <h2 className="text-2xl font-semibold mb-2">Drop your database or data file here</h2>
+        <h2 className="text-2xl font-medium tracking-tight mb-3">Explore your data</h2>
         <p className="text-muted-foreground mb-6">
-          Supports SQLite, CSV, TSV, JSON, JSONL, Excel, Arrow, and Feather files
+          Drop a file here to get started. SQLite, CSV, JSON, Excel, Arrow, and more.
         </p>
 
-        <label className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md cursor-pointer hover:bg-primary/90 transition-colors">
+        <label className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-md cursor-pointer hover:bg-primary/90 transition-colors">
           <Upload className="h-4 w-4" />
           <span>Browse files</span>
           <input
@@ -82,7 +82,7 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
         )}
 
         <div className="mt-8 pt-8 border-t border-border">
-          <p className="text-sm text-muted-foreground mb-4">Or try a sample dataset</p>
+          <p className="text-sm text-muted-foreground mb-4">Try a sample</p>
           <div className="flex flex-wrap gap-2 justify-center">
             <button
               onClick={async () => {
@@ -99,9 +99,9 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
                   alert('Failed to load sample database. Please try again or use a different sample.');
                 }
               }}
-              className="text-sm text-primary hover:underline"
+              className="text-sm text-muted-foreground hover:text-foreground border border-border rounded-md px-3 py-1.5 hover:bg-accent transition-colors"
             >
-              Load sample DB
+              SQLite
             </button>
             <button
               onClick={async () => {
@@ -116,9 +116,9 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
                 await importFiles([file]);
                 onFileLoaded?.();
               }}
-              className="text-sm text-primary hover:underline"
+              className="text-sm text-muted-foreground hover:text-foreground border border-border rounded-md px-3 py-1.5 hover:bg-accent transition-colors"
             >
-              Load sample CSV
+              CSV
             </button>
             <button
               onClick={async () => {
@@ -132,9 +132,9 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
                 await importFiles([file]);
                 onFileLoaded?.();
               }}
-              className="text-sm text-primary hover:underline"
+              className="text-sm text-muted-foreground hover:text-foreground border border-border rounded-md px-3 py-1.5 hover:bg-accent transition-colors"
             >
-              Load sample JSON
+              JSON
             </button>
             <button
               onClick={async () => {
@@ -146,9 +146,9 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
                 await importFiles([file]);
                 onFileLoaded?.();
               }}
-              className="text-sm text-primary hover:underline"
+              className="text-sm text-muted-foreground hover:text-foreground border border-border rounded-md px-3 py-1.5 hover:bg-accent transition-colors"
             >
-              Load sample JSONL
+              JSONL
             </button>
             <button
               onClick={async () => {
@@ -165,9 +165,9 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
                   alert('Failed to load sample Arrow file. Please drag and drop the file instead.');
                 }
               }}
-              className="text-sm text-primary hover:underline"
+              className="text-sm text-muted-foreground hover:text-foreground border border-border rounded-md px-3 py-1.5 hover:bg-accent transition-colors"
             >
-              Load sample Arrow
+              Arrow
             </button>
             <button
               onClick={async () => {
@@ -184,20 +184,20 @@ export function FileDropZone({ onFileLoaded }: FileDropZoneProps) {
                   alert('Failed to load sample Feather file. Please drag and drop the file instead.');
                 }
               }}
-              className="text-sm text-primary hover:underline"
+              className="text-sm text-muted-foreground hover:text-foreground border border-border rounded-md px-3 py-1.5 hover:bg-accent transition-colors"
             >
-              Load sample Feather
+              Feather
             </button>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border space-y-4">
+        <div className="mt-8 space-y-2">
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <Shield className="h-4 w-4" />
-            <span>Your files are processed locally in your browser</span>
+            <span>Files stay in your browser</span>
           </div>
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <span>No data is uploaded to any server</span>
+            <span>No uploads. No account needed.</span>
           </div>
         </div>
       </div>
